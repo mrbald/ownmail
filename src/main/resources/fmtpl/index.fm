@@ -1,0 +1,22 @@
+<#setting url_escaping_charset='utf-8'>
+<!DOCTYPE html>
+<html>
+<head>
+<title>${query!}</title>
+</head>
+<body>
+  <form id="search" autocomplete="off" method="post" action="${searchActionPath}">
+    <input id="query" name="query" type="text" autocomplete="off" value="${query!}"/>&nbsp;<input type="submit" value="Go"/>
+  </form>
+<#if messages??>
+<#list messages as message>
+  <p><pre>
+    Subject: <a href="${fetchActionPath}?file=${message.fileName?url}">${message.subject!}</a>
+    From:    ${message.from?join("; ")}
+    Sent:    ${message.sentDate?datetime}
+    Size:    ${message.size} bytes
+  </pre></p>
+</#list>
+</#if>
+</body>
+</html>
